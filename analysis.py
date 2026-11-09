@@ -13,9 +13,12 @@ def load_dataset(file_path: Path) -> pd.DataFrame:
     data = pd.read_csv(file_path, sep=r'\s+', skipinitialspace=True)
     data.columns = data.columns.str.strip()
 
+    math_col = 'MATH' if 'MATH' in data.columns else 'MATEMATIK'
+    verbal_col = 'TURKISH' if 'TURKISH' in data.columns else 'TURKCE'
+
     return pd.DataFrame({
-        'Math': data['MATEMATIK'].astype(float),
-        'Verbal': data['TURKCE'].astype(float),
+        'Math': data[math_col].astype(float),
+        'Verbal': data[verbal_col].astype(float),
     })
 
 
